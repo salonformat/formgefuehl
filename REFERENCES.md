@@ -38,3 +38,13 @@ Diese Einflüsse sind gestalterische Schlussfolgerungen, keine Beteiligung oder 
 - [MAK: Vally Wieselthier](https://www.mak.at/programm/ausstellungen/vally_wieselthier): expressive Keramik und die wichtige Rolle der Künstlerinnen in der Wiener-Werkstätte-Keramik.
 
 Drei Kurzporträts stehen sichtbar im Hauptablauf. Namen erscheinen außerdem dort, wo Besucher:innen die Stoffwirkung erkunden. Auch hier werden ausschließlich eigene Texte und Links verwendet, keine Porträts oder Werkabbildungen.
+
+## Context added to the visible experience
+- https://smarthistory.org/wiener-werkstaette/ — craft production, expense and affluent patrons.
+- https://www.mak.at/felicerixueno — imaginative patterns, flowers and birds; geometry represents only part of the workshop’s output.
+
+## Motion and material study — 16 September 2026
+- https://lusion.co/about/ — real-time 3D / interactive production context and awards. Direction taken for this project: visitor input remains the subject of the spatial transformation, rather than adding unrelated decorative motion.
+- https://www.awwwards.com/websites/%23F0EBE7/?page=14 — Lusion v3 award listing.
+- https://dogstudio.co/cases/kikk-ar/ — generative interactive artworks; precedent for treating interaction as the work itself.
+- https://threejs.org/docs/pages/MeshPhysicalMaterial.html — cloth sheen and brushed-metal anisotropy. Original procedural geometry and textures are used here; no assets or code copied from reference projects.

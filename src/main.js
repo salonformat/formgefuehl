@@ -15,7 +15,7 @@ app.innerHTML = `
     <section id="intro" class="screen intro" aria-labelledby="title">
       <div class="intro-copy"><h1 id="title" aria-label="Formgefühl">Form<br><span>gefühl.</span></h1>
       <p class="lede">Wiener Werkstätte.<br>Kunst für den Alltag.</p>
-      <p class="intro-context">In Wien entstand 1903 eine Gemeinschaft von Künstler:innen und Handwerker:innen. Sie gestalteten Möbel, Stoffe, Geschirr und ganze Räume. Alles sollte zusammenpassen – bis ins kleinste Detail.</p>
+      <p class="intro-context">In Wien entstand 1903 eine Gemeinschaft von Künstler:innen und Handwerker:innen. Sie gestalteten Möbel, Stoffe, Geschirr und ganze Räume. Die aufwendig gefertigten Stücke waren meist nur für Wohlhabende erschwinglich.</p>
       <button class="primary" id="start">Mein Muster gestalten ${arrow}</button>
       <p class="quiet">Vom ersten Kästchen bis zum ganzen Raum.</p></div>
       <button id="intro-art" class="intro-art" aria-label="Dieses Muster selbst gestalten"></button>
@@ -33,7 +33,7 @@ app.innerHTML = `
       <div class="compose-actions"><button class="primary" id="enter">Das Muster betreten ${arrow}</button>
       <p id="empty-hint" class="quiet" hidden>Setze zuerst mindestens ein Zeichen.</p></div></div>
       <aside class="compose-notes">      <p class="learning" id="repeat-learning">Ein Zeichen wird zum <em>Rapport</em> – der Einheit, die sich wiederholt. Aus solchen Wiederholungen entstehen zum Beispiel Stoff- und Tapetenmuster.</p>
-      <details class="workshop-story"><summary>Was war die Wiener Werkstätte?</summary><p>Eine Gemeinschaft von Gestalter:innen und Handwerker:innen in Wien. Josef Hoffmann, Koloman Moser und Fritz Waerndorfer gründeten sie 1903.</p><p>Sie entwarfen Möbel, Geschirr, Schmuck und Stoffe. Ihr Wunsch: Dinge des Alltags mit derselben Sorgfalt gestalten wie ein Kunstwerk.</p><p>Frauen prägten die Werkstätte entscheidend mit. Mathilde Flögl und Felice Rix-Ueno entwarfen unter anderem Stoffmuster; Vally Wieselthier wurde besonders für ihre Keramik bekannt.</p><p>Die Wiener Werkstätte bestand bis 1932. Klare geometrische Muster gehörten dazu – aber auch Blumen, geschwungene Linien und verspielte Formen.</p></details>
+      <p class="learning pattern-context">Hier spielst du mit Geometrie. Zur Wiener Werkstätte gehörten auch Blumenmuster, geschwungene Linien und verspielte Formen.</p><details class="workshop-story"><summary>Was war die Wiener Werkstätte?</summary><p>Eine Gemeinschaft von Gestalter:innen und Handwerker:innen in Wien. Josef Hoffmann, Koloman Moser und Fritz Waerndorfer gründeten sie 1903.</p><p>Sie entwarfen Möbel, Geschirr, Schmuck und Stoffe. Ihr Wunsch: Dinge des Alltags mit derselben Sorgfalt gestalten wie ein Kunstwerk.</p><p>Frauen prägten die Werkstätte entscheidend mit. Mathilde Flögl und Felice Rix-Ueno entwarfen unter anderem Stoffmuster; Vally Wieselthier wurde besonders für ihre Keramik bekannt.</p><p>Die Wiener Werkstätte bestand bis 1932. Klare geometrische Muster gehörten dazu – aber auch Blumen, geschwungene Linien und verspielte Formen.</p></details>
 </aside>
       <p class="preview-caption">Dein Zeichen verändert das Ganze.</p>
     </section>
@@ -58,11 +58,11 @@ app.innerHTML = `
       <button class="primary" id="download">Dein Muster mitnehmen ${arrow}</button><button class="text-button restart" id="restart">Noch einmal spielen</button>
 
       <p class="love-note">Ich liebe die Wiener Werkstätte für ihre Muster, ihren Mut zur Farbe und die Sorgfalt, mit der selbst kleine Dinge gestaltet wurden. Diese Freude möchte ich mit dir teilen.<br><span>Salon Format</span></p>
-      </div><p class="independent">Ein unabhängiges Vermittlungsprojekt von Salon Format. Kein Auftrag und keine Kooperation mit dem MAK. Alle Muster und Räume wurden für diese Experience neu gestaltet.</p></div>
+      </div><p class="independent">Ein unabhängiges Projekt von Salon Format, entstanden ohne Zusammenarbeit mit einem Museum.</p></div>
     </section>
   </main>
   <footer><nav aria-label="Deine Reise"><span data-step="intro" aria-current="step">Anfang</span><span data-step="compose">Zeichen</span><span data-step="room">Raum</span><span data-step="end">Gedanke</span></nav><button id="about">Über diese Erfahrung</button></footer>
-  <dialog id="about-dialog" aria-labelledby="about-title"><button id="close-about" class="text-button">Schließen</button><h2 id="about-title">Formgefühl.</h2><p>Eine kleine Liebeserklärung von Salon Format an die Wiener Werkstätte: an das genaue Hinsehen, an die Verbindung von Kunst und Handwerk, an die Sorgfalt selbst im kleinsten Detail.</p><p>Du gestaltest ein eigenes Zeichen, erkundest Wiederholung, Maßstab und Material – und erlebst die Idee des Gesamtkunstwerks.</p><p>Alle Muster, Raumkompositionen und Klänge sind für dieses Projekt neu entstanden. Es werden keine Bilder, Scans oder Logos des MAK verwendet. Es besteht keine Kooperation mit dem Museum.</p><a href="https://salonformat.com">Mehr von Salon Format</a><p class="quiet">Ohne Anmeldung. Ohne Tracking. Dein Entwurf bleibt während der Sitzung in deinem Browser.</p></dialog>
+  <dialog id="about-dialog" aria-labelledby="about-title"><button id="close-about" class="text-button">Schließen</button><h2 id="about-title">Formgefühl.</h2><p>Eine kleine Liebeserklärung von Salon Format an die Wiener Werkstätte: an das genaue Hinsehen, an die Verbindung von Kunst und Handwerk, an die Sorgfalt selbst im kleinsten Detail.</p><p>Du gestaltest ein eigenes Zeichen, erkundest Wiederholung, Maßstab und Material – und erlebst die Idee des Gesamtkunstwerks.</p><p>Formgefühl ist ein unabhängiges Projekt von Salon Format, entstanden ohne Zusammenarbeit mit einem Museum. Alle Muster, Räume und Klänge wurden eigens dafür entwickelt.</p><a href="https://salonformat.com">Mehr von Salon Format</a><p class="quiet">Ohne Anmeldung. Ohne Tracking. Dein Entwurf bleibt während der Sitzung in deinem Browser.</p></dialog>
   <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
 `;
 const $ = s => document.querySelector(s);
@@ -125,7 +125,7 @@ function renderGrid() {
   context.fillRect(0,0,strip.width,strip.height);
 }
 function remember() { history.push([...cells]); if(history.length>50)history.shift(); }
-function edit(i) { hasEdited=true;cells[i]=erasing?0:encodeCell(brushShape,brushColor,brushRotation);renderGrid();chime();announce('Dein Zeichen wiederholt sich im Muster.'); }
+function edit(i) { hasEdited=true;cells[i]=erasing?0:encodeCell(brushShape,brushColor,brushRotation);renderGrid();scene.pulse?.();if(!reduced){$('#motif').children[i].animate([{transform:'scale(.82)'},{transform:'scale(1.07)'},{transform:'scale(1)'}],{duration:230,easing:'ease-out'});$('#mobile-repeat').animate([{opacity:.65},{opacity:1}],{duration:200});}chime();announce('Dein Zeichen wiederholt sich im Muster.'); }
 $('#motif').addEventListener('pointerdown',e=>{const b=e.target.closest('[data-index]');if(!b)return;e.preventDefault();remember();painting=true;lastPainted=Number(b.dataset.index);b.focus({preventScroll:true});edit(lastPainted);});
 window.addEventListener('pointermove',e=>{if(!painting)return;const b=document.elementFromPoint(e.clientX,e.clientY)?.closest('#motif [data-index]');if(b){const i=Number(b.dataset.index);if(i!==lastPainted){lastPainted=i;edit(i);}}});
 window.addEventListener('pointerup',()=>painting=false);window.addEventListener('pointercancel',()=>painting=false);window.addEventListener('blur',()=>painting=false);
