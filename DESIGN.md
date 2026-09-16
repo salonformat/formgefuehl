@@ -94,3 +94,7 @@ Primary actions use a vermilion paper-colored label, darken on hover, and rise 2
 ## Do's and Don'ts
 
 Quality bar: strong Della Respira typography, a genuinely spatial reveal, immediate feedback on user-designed motifs, short accurate learning text, accessible fallback, no unattributed museum imagery.
+
+## Responsive refinement — 16 September 2026
+The closing screen now uses the full desktop width: context and craft illustration, women designers with a large illustration, and a vermilion column containing the personal note and export. The ambient pattern is hidden on that reading screen. Images retain transparency and descriptive alt text; explanatory captions remain available to assistive technology.
+Desktop editor actions remain visible at the bottom, while background information sits beside the pattern. On mobile, the editor scrolls in the space above its fixed action, avoiding content underneath the button. The introductory mobile pattern occupies a measured, separate block; its text and footer do not overlap the drawing.
