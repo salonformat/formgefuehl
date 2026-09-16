@@ -18,11 +18,11 @@ app.innerHTML = `
       <p class="intro-context">In Wien entstand 1903 eine Gemeinschaft von Künstler:innen und Handwerker:innen. Sie gestalteten Möbel, Stoffe, Geschirr und ganze Räume. Alles sollte zusammenpassen – bis ins kleinste Detail.</p>
       <button class="primary" id="start">Mein Muster gestalten ${arrow}</button>
       <p class="quiet">Vom ersten Kästchen bis zum ganzen Raum.</p></div>
-      <button id="intro-art" class="intro-art" aria-label="Dieses Muster selbst gestalten"><span>Dieses Muster wartet auf dich ${arrow}</span></button>
+      <button id="intro-art" class="intro-art" aria-label="Dieses Muster selbst gestalten"></button>
       <div class="intro-bottom"><p>Eine kleine Liebeserklärung<br>an die Wiener Werkstätte.</p><span>Eine Experience von<br>Salon Format.</span></div>
     </section>
     <section id="compose" class="screen compose" aria-labelledby="compose-title" hidden>
-      <div class="workbench"><button class="back" id="back-intro">Zurück</button><h2 id="compose-title" tabindex="-1">Klein anfangen.</h2>
+      <div class="workbench"><button class="back" id="back-intro">Zurück</button><h2 id="compose-title" tabindex="-1">Fange klein an.</h2>
       <p>Wähle Form und Farbe.<br>Tippe oder zeichne in die Kästchen.</p>
       <div class="shape-tools" role="group" aria-label="Form wählen"><button data-shape="0" aria-label="Quadrat" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16"/></svg></button><button data-shape="1" aria-label="Kreis" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/></svg></button><button data-shape="2" aria-label="Bogen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4A16 16 0 0 1 20 20H12A8 8 0 0 0 4 12Z"/></svg></button><button data-shape="3" aria-label="Dreieck" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16Z"/></svg></button><button id="rotate" class="text-button">Drehen</button></div>
       <div class="motif-wrap"><span class="tap-hint" id="tap-hint">Hier tippen</span>
@@ -37,7 +37,9 @@ app.innerHTML = `
       <p class="preview-caption">Dein Zeichen verändert das Ganze.</p>
     </section>
     <section id="room" class="screen room" aria-labelledby="room-title" hidden>
-      <div class="room-heading"><button class="back" id="back-compose">Zeichen verändern</button><h2 id="room-title" tabindex="-1">Dein Muster<br>wird zum Raum.</h2><p id="room-instruction">Bewege den Zeiger. Schau dich um.</p></div>
+      <div id="room-view" class="room-view">
+      <div class="room-heading"><button class="back" id="back-compose">Muster bearbeiten</button><h2 id="room-title" tabindex="-1">Dein Muster<br>wird zum Raum.</h2><p id="room-instruction">Bewege den Zeiger. Schau dich um.</p></div>
+      </div>
       <div class="room-controls"><div class="material-options" role="group" aria-label="Material erleben"><button data-material="paper" aria-pressed="true">Papier</button><button data-material="textile" aria-pressed="false">Textil</button><button data-material="metal" aria-pressed="false">Metall</button></div>
       <p id="material-copy" class="material-copy">Ein Muster für Papier oder Tapete. Die Wiener Werkstätte gestaltete beides.</p>
       <label class="scale-control" for="scale">Maßstab <input id="scale" type="range" min="1" max="7" value="3" step="0.1" aria-valuetext="Mittleres Muster"><span>Klein ↔ groß</span></label>
@@ -45,14 +47,15 @@ app.innerHTML = `
     </section>
     <section id="end" class="screen end" aria-labelledby="end-title" hidden>
       <div class="end-copy"><h2 id="end-title" tabindex="-1">Alles hängt<br>zusammen.</h2>
-      <p class="end-lead">Ein kleines Muster.<br>Ein ganz anderer Raum.</p>
-      <p>Für die Wiener Werkstätte hörte Gestaltung nicht beim einzelnen Gegenstand auf. Ein Stuhl, der Stoff darauf, die Tapete dahinter: All das konnte zusammen entworfen werden.</p>
-      <p>Dahinter steht die Idee des <em>Gesamtkunstwerks.</em><br>Verschiedene Dinge werden zu einem stimmigen Ganzen.</p>
-      <section class="women" aria-labelledby="women-title"><h3 id="women-title">Die Frauen dahinter.</h3><p>Viele Frauen gaben der Wiener Werkstätte ihre Vielfalt. Ihre Namen waren lange weniger bekannt. Drei davon solltest du kennenlernen.</p><div class="women-names" role="group" aria-label="Gestalterinnen entdecken"><button data-woman="floegl" aria-pressed="true">Mathilde Flögl</button><button data-woman="rix" aria-pressed="false">Felice Rix-Ueno</button><button data-woman="wieselthier" aria-pressed="false">Vally Wieselthier</button></div><p id="woman-copy" aria-live="polite">Mathilde Flögl gestaltete Stoffe, Tapeten, Keramik, Taschen und vieles mehr. Ihre Arbeit zeigt, wie offen die Grenzen zwischen den einzelnen Bereichen waren.</p><a href="https://www.mak.at/artikel/ausstellungsfuehrung_die_frauen_der_wiener_werkstaette" target="_blank" rel="noopener noreferrer">Mehr über die Frauen der Wiener Werkstätte ${arrow}</a></section>
+      <p class="end-lead">Vom Stoff bis zum Sessel.</p>
+      <p>Die Wiener Werkstätte entwarf nicht nur einzelne Dinge, sondern auch ganze Einrichtungen. Möbel, Stoffe und Geschirr wurden dabei aufeinander abgestimmt.</p>
+      <p>Auch das gehört zur Idee vom <em>Gesamtkunstwerk:</em> Kunst, Handwerk und Architektur werden gemeinsam gedacht.</p>
+      <figure class="making-ink"><img src="/illustrations/handwerk-tusche.png" width="1536" height="1024" loading="lazy" alt="Freie Tuscheillustration: Hände zeichnen ein Muster, drapieren Stoff und formen Keramik."><figcaption>Eine freie Illustration zu Entwurf und Handwerk.</figcaption></figure>
+      <section class="women" aria-labelledby="women-title"><h3 id="women-title">Die Frauen dahinter.</h3><p>Viele Frauen gaben der Wiener Werkstätte ihre Vielfalt. Ihre Namen waren lange weniger bekannt. Drei davon solltest du kennenlernen.</p><figure class="designer-ink"><img loading="lazy" src="/illustrations/gestalterin-tusche.png" width="1536" height="1024" alt="Freie Tuscheillustration: eine Frau zeichnet ein Muster am Arbeitstisch."><figcaption>Eine freie Illustration, kein historisches Porträt.</figcaption></figure><div class="women-names" role="group" aria-label="Gestalterinnen entdecken"><button data-woman="floegl" aria-pressed="true">Mathilde Flögl</button><button data-woman="rix" aria-pressed="false">Felice Rix-Ueno</button><button data-woman="wieselthier" aria-pressed="false">Vally Wieselthier</button></div><p id="woman-copy" aria-live="polite">Mathilde Flögl gestaltete Stoffe, Tapeten, Keramik, Taschen und vieles mehr. Ihre Arbeit zeigt, wie offen die Grenzen zwischen den einzelnen Bereichen waren.</p><a href="https://www.mak.at/artikel/ausstellungsfuehrung_die_frauen_der_wiener_werkstaette" target="_blank" rel="noopener noreferrer">Mehr über die Frauen der Wiener Werkstätte ${arrow}</a></section>
       <div class="reflection"><p>Was hat deinen Raum stärker verändert?</p><div><button data-reflect="scale">Der Maßstab</button><button data-reflect="material">Das Material</button></div><p id="reflection-answer" aria-live="polite"></p></div>
       <button class="primary" id="download">Dein Muster mitnehmen ${arrow}</button><button class="text-button restart" id="restart">Noch einmal spielen</button>
       <details><summary>Die Geschichte dahinter</summary><p>1903 gründeten Josef Hoffmann, Koloman Moser und Fritz Waerndorfer die Wiener Werkstätte. Kunst und Handwerk sollten den Alltag prägen. Geometrie war eine ihrer Ausdrucksformen – neben vielen anderen.</p><p>Entwerfen bedeutete hier auch: über Material und Ausführung nachdenken. Dieselbe Idee kann als Druck, Gewebe oder Metallarbeit eine andere Wirkung entfalten. Genau das hast du gerade ausprobiert.</p><p>Dein Entwurf ist eine heutige, freie Interpretation. Er bildet kein historisches Muster und keinen historischen Raum nach.</p><a href="https://www.mak.at/ausstellung/wien1900" target="_blank" rel="noopener noreferrer">Weiterentdecken: Wien 1900 im MAK ${arrow}</a><a href="https://www.mak.at/artikel/sammlung_metall_und_wiener_werkstaette_archiv" target="_blank" rel="noopener noreferrer">Über das Wiener-Werkstätte-Archiv ${arrow}</a></details>
-      <p class="love-note">Wie viel in einem kleinen Detail stecken kann.<br>Darum diese kleine Liebeserklärung.<br><span>Salon Format</span></p>
+      <p class="love-note">Ich liebe die Wiener Werkstätte für ihre Muster, ihren Mut zur Farbe und die Sorgfalt, mit der selbst kleine Dinge gestaltet wurden. Diese Freude möchte ich mit dir teilen.<br><span>Salon Format</span></p>
       <p class="independent">Ein unabhängiges Vermittlungsprojekt von Salon Format. Kein Auftrag und keine Kooperation mit dem MAK. Alle Muster und Räume wurden für diese Experience neu gestaltet.</p></div>
     </section>
   </main>
@@ -66,6 +69,9 @@ let brushShape=0,brushColor=0,brushRotation=0,erasing=false,painting=false,lastP
 const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
 let reduced = motionQuery.matches;
 const scene = createScene($('#world'), cells, accent, reduced);
+function syncRoomView(){if(phase!=='room')return;const r=$('#room-view').getBoundingClientRect();const world=$('#world');world.style.setProperty('--room-top',`${r.top}px`);world.style.setProperty('--room-left',`${r.left}px`);world.style.setProperty('--room-width',`${r.width}px`);world.style.setProperty('--room-height',`${r.height}px`);}
+new ResizeObserver(syncRoomView).observe($('#room-view'));
+window.addEventListener('scroll',syncRoomView,{passive:true});window.addEventListener('resize',syncRoomView);
 if (scene.isFallback) $('#room-instruction').textContent = 'Dein Browser zeigt eine flächige Ansicht. Material und Maßstab kannst du trotzdem erkunden.';
 else if (matchMedia('(pointer: coarse)').matches) $('#room-instruction').textContent = 'Ziehe über den Raum. Schau dich um.';
 let audioContext, master, oscillators = [], sound = false;
@@ -99,6 +105,7 @@ function setPhase(next, record=true) {
   document.querySelectorAll('[data-step]').forEach(s => s.setAttribute('aria-current',s.dataset.step===next?'step':'false'));
   scene.setPhase(next);
   window.scrollTo(0,0);
+  syncRoomView();
   const heading = $(`#${next} h1, #${next} h2`); heading.setAttribute('tabindex','-1'); heading.focus({preventScroll:true});
   if (sound && audioContext) oscillators.forEach((o,i)=>o.frequency.setTargetAtTime([130.81,196,261.63][i]*(next==='room'?1: .75),audioContext.currentTime,1));
   translateDOM();
@@ -128,9 +135,9 @@ $('#clear').onclick=()=>{remember();cells=Array(25).fill(0);renderGrid();announc
 $('#undo').onclick=()=>{if(history.length){cells=history.pop();renderGrid();}};
 function disableEraser(){erasing=false;$('#eraser').setAttribute('aria-pressed','false');}
 document.querySelectorAll('[data-color]').forEach(b=>b.onclick=()=>{brushColor=Number(b.dataset.color);disableEraser();document.querySelectorAll('[data-color]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
-document.querySelectorAll('[data-shape]').forEach(b=>b.onclick=()=>{brushShape=Number(b.dataset.shape);disableEraser();document.querySelectorAll('[data-shape]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
+document.querySelectorAll('.shape-tools [data-shape]').forEach(b=>b.onclick=()=>{brushShape=Number(b.dataset.shape);disableEraser();document.querySelectorAll('.shape-tools [data-shape]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
 document.querySelector('.shape-tools [data-shape="2"] svg').innerHTML=shapePaths[2];
-$('#rotate').onclick=()=>{brushRotation=(brushRotation+1)%4;document.querySelectorAll('[data-shape] svg').forEach(s=>s.style.transform=`rotate(${brushRotation*90}deg)`);};
+$('#rotate').onclick=()=>{brushRotation=(brushRotation+1)%4;document.querySelectorAll('.shape-tools [data-shape] svg').forEach(s=>s.style.transform=`rotate(${brushRotation*90}deg)`);};
 $('#eraser').onclick=()=>{erasing=!erasing;$('#eraser').setAttribute('aria-pressed',String(erasing));};
 document.querySelectorAll('[data-material]').forEach(b=>b.onclick=()=>{
   material=b.dataset.material;scene.update(cells,accent,material);

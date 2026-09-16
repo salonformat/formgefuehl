@@ -1,0 +1,6 @@
+Built-in image_gen edit, 16 September 2026. Original AI-assisted illustration, not a historical portrait or reproduction. PNG with generated alpha retained.
+
+Output: handwerk-tusche.png
+
+Prompt:
+Use case: style-transfer. Edit target into a contemporary playful independent art-school ZINE illustration appealing to Gen Z, less perfect, far less polished and retro. Preserve three craft subjects only: oversized hands drawing an irregular geometric pattern at left; wobbly draped patterned cloth in middle; a quirky asymmetrical ceramic vase with a hand shaping its rim at right. Confident awkward proportions, very sparse spontaneous uneven BLACK PEN contours, dry marker skips, broken and overdrawn lines, lively wrong-looking perspective and naive wit. Flat small VERMILION #b74332 and MUSTARD #b38b40 marks. Bold economical forms with lots of air. No shading, no hatching, no graceful perfect curves, no corporate vector, no text or emojis, no cute mascot, no extras. Genuine transparent alpha background everywhere, including interiors between ink strokes; no paper, no cream fill, no rectangle, no fake checkerboard. It must sit directly on a web page. Keep all subjects fully inside generous transparent margins, landscape 3:2.

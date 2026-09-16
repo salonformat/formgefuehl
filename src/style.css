@@ -37,3 +37,25 @@ body[data-phase=intro]::before{content:'';position:fixed;inset:0 0 0 51%;backgro
 @media(max-width:760px){.intro-context{max-width:315px;font-size:14px}.intro-copy{padding-top:15px}.intro-copy .lede{margin-top:21px}body[data-phase=intro]::before{top:600px}body[data-phase=intro] #world{top:480px}.intro-art{top:535px}.intro-copy .primary{font-size:16px}.shape-tools{gap:11px}}
 @media(max-height:780px) and (min-width:761px){.intro-copy{padding-top:0}.intro-copy h1{font-size:70px}.intro-copy .lede{margin:16px 0 10px}.intro-context{font-size:13px;margin-bottom:18px}.intro-bottom{padding-top:20px}.motif{width:185px}.motif-wrap{width:185px}.shape-tools{margin-top:10px}.learning{font-size:13px;margin:10px 0}.workshop-story{margin-bottom:13px}.workbench .primary{min-height:50px;padding:13px 18px}}
 .motif button[data-value]::after{display:none}.motif button>svg{position:absolute;inset:0;width:100%;height:100%;fill:var(--cell-color);stroke:none;transform:rotate(var(--rotation));pointer-events:none}.motif button:hover{box-shadow:inset 0 0 0 1px var(--red)}
+
+/* Controls occupy their own row. The renderer fits above them, never underneath. */
+body[data-phase=room] #world{inset:auto;left:var(--room-left,0px);top:var(--room-top,110px);width:var(--room-width,100vw);height:var(--room-height,60vh);transform:none;opacity:1}
+.room{padding:0;gap:0;min-height:calc(100svh - 176px)}.room-view{position:relative;flex:1;min-height:360px;width:100%;pointer-events:auto}.room-heading{position:absolute;left:22px;top:18px;margin:0;padding:12px 18px;max-width:280px}.room-heading h2{font-size:25px}.room-heading .back{font-size:12px;margin-bottom:8px}.room-heading p{font-size:12px}.room-controls{width:100%;max-width:none;margin:0;border-top:1px solid var(--line);padding:15px 4.5vw}.room-view .room-heading{pointer-events:auto}
+@media(min-width:761px){.room-controls{grid-template-columns:320px minmax(200px,1fr) auto;gap:25px}.room-controls .primary{font-size:14px;min-height:45px;padding:12px 18px}.material-options button{font-size:17px}.material-copy{font-size:12px}.scale-control{margin-top:5px}.room-view{min-height:calc(100svh - 310px)}}
+@media(max-width:760px){.room{min-height:calc(100svh - 148px)}.room-view{min-height:380px}.room-heading{left:10px;top:12px;padding:9px 12px;max-width:220px}.room-heading h2{font-size:21px}.room-heading p{font-size:11px}.room-controls{padding:12px 20px;max-width:none}.material-copy{font-size:12px;min-height:0}.room-controls .primary{min-height:44px;font-size:14px}.material-options{gap:24px}}
+
+.making-ink,.designer-ink{margin:24px 0 30px}.making-ink img,.designer-ink img{display:block;width:100%;height:auto}.making-ink figcaption,.designer-ink figcaption{font-size:11px;line-height:1.5;color:var(--muted);margin-top:8px}.designer-ink{max-width:370px}
+
+/* A compact material rail gives the room more vertical space. */
+@media(min-width:1001px){
+ .room-controls{grid-template-columns:auto 190px minmax(180px,1fr) auto;column-gap:24px;row-gap:0;padding:10px 4.5vw;min-height:78px}
+ .material-options{grid-column:1;grid-row:1;gap:5px}
+ .material-options button{font-size:16px;padding:8px}
+ .scale-control{grid-column:2;grid-row:1;margin:0;gap:8px;font-size:11px}
+ .scale-control span{display:none}
+ .material-copy{grid-column:3;grid-row:1;font-size:11px;line-height:1.45;max-width:46ch}
+ .room-controls .primary{grid-column:4;grid-row:1;font-size:13px;padding:10px 14px;min-height:42px;gap:14px}
+ .room-view{min-height:calc(100svh - 254px)}
+}
+@media(min-width:761px) and (max-width:1000px){.room-controls{column-gap:18px;row-gap:0;padding:10px 3vw;grid-template-columns:260px 1fr auto}.room-view{min-height:calc(100svh - 275px)}}
+@media(max-width:760px){.room-controls{padding:8px 20px}.material-options{padding:0;gap:22px}.material-options button{font-size:16px;padding:5px}.material-copy{font-size:11px;line-height:1.4;margin:8px 0}.scale-control{margin:3px 0 6px}.room-controls .primary{min-height:38px;padding:8px 14px;font-size:13px}.room-view{min-height:max(400px,calc(100svh - 330px))}}

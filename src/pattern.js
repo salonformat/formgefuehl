@@ -7,8 +7,7 @@ export function encodeCell(shape,color,rotation=0){return 1+color+4*shape+16*rot
 export function decodeCell(value){const n=Math.max(0,value-1);return {shape:Math.floor(n/4)%4,color:n%4,rotation:Math.floor(n/16)%4};}
 export function cellColor(value,accent=ACCENTS[0]){return [INK,accent,ACCENTS[1],ACCENTS[2]][decodeCell(value).color];}
 
-export function nextCell(value) { return (value + 1) % 3; }
-export function motifSignature(cells) { return cells.map(v => v.toString()).join(''); }
+export function motifSignature(cells) { return cells.join(','); }
 export function createPattern(cells, accent, material = 'paper', size = 600) {
   const canvas = document.createElement('canvas');
   canvas.width = canvas.height = size;

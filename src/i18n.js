@@ -1,5 +1,13 @@
 import { decodeCell } from './pattern.js';
 const pairs = [
+ ["Vom Stoff bis zum Sessel.", "From fabric to furniture."],
+ ["Die Wiener Werkstätte entwarf nicht nur einzelne Dinge, sondern auch ganze Einrichtungen. Möbel, Stoffe und Geschirr wurden dabei aufeinander abgestimmt.", "The Wiener Werkstätte designed individual objects as well as entire interiors, with furniture, fabrics and tableware made to go together."],
+ ["Auch das gehört zur Idee vom", "This is part of the idea of the"],
+ ["Gesamtkunstwerk:", "Gesamtkunstwerk:"],
+ ["Kunst, Handwerk und Architektur werden gemeinsam gedacht.", "art, craft and architecture designed together."],
+ ["Ich liebe die Wiener Werkstätte für ihre Muster, ihren Mut zur Farbe und die Sorgfalt, mit der selbst kleine Dinge gestaltet wurden. Diese Freude möchte ich mit dir teilen.", "I love the Wiener Werkstätte for its patterns, its bold colours and the care given to even the smallest objects. I wanted to share that joy with you."],
+ ["Eine freie Illustration, kein historisches Porträt.", "An imagined scene, not a historical portrait."],
+ ['Freie Tuscheillustration: eine Frau zeichnet ein Muster am Arbeitstisch.','Original ink-style illustration: a woman draws a pattern at her worktable.'],['Freie Tuscheillustration: Hände zeichnen ein Muster, drapieren Stoff und formen Keramik.','Original ink-style illustration: hands sketch a pattern, drape fabric and shape clay.'],['Eine freie Illustration zu Entwurf und Handwerk.','An original illustration of design and craft.'],
  ['Wiener Werkstätte.','Wiener Werkstätte.'],['Kunst für den Alltag.','Art for everyday life.'],
  ['In Wien entstand 1903 eine Gemeinschaft von Künstler:innen und Handwerker:innen. Sie gestalteten Möbel, Stoffe, Geschirr und ganze Räume. Alles sollte zusammenpassen – bis ins kleinste Detail.','In Vienna in 1903, artists and craftspeople came together. They designed furniture, fabrics, tableware and entire rooms. Everything could belong together, down to the smallest detail.'],
  ['Wähle Form und Farbe.','Pick a shape and a colour.'],['Tippe oder zeichne in die Kästchen.','Tap or draw across the squares.'],['Form wählen','Choose a shape'],['Farbe wählen','Choose a colour'],['Quadrat','Square'],['Kreis','Circle'],['Bogen','Arc'],['Dreieck','Triangle'],['Tintenschwarz','Ink black'],['Drehen','Rotate'],['Radieren','Erase'],
@@ -33,11 +41,11 @@ const pairs = [
  ['Von dir gestaltet.','Made by you.'],['Von Salon Format erdacht.','Dreamed up by Salon Format.'],
  ['Alle Projekte','All projects'],['Salon Format – zur Website','Salon Format – visit the website'],
  ['Bewegung reduzieren','Reduce motion'],['Bewegung reduziert','Motion reduced'],['Ton aus','Sound off'],['Ton an','Sound on'],['Ton nicht verfügbar','Sound unavailable'],
- ['Zurück','Back'],['Klein anfangen.','Start small.'],['Tippe auf die Felder.','Tap the squares.'],['Ein zweites Mal bringt Farbe ins Spiel.','Tap again to add a little colour.'],
+ ['Zurück','Back'],['Fange klein an.','Start small.'],['Tippe auf die Felder.','Tap the squares.'],['Ein zweites Mal bringt Farbe ins Spiel.','Tap again to add a little colour.'],
  ['Dein Zeichen, 5 mal 5 Felder','Your mark, a grid of 5 by 5 squares'],['Akzentfarbe','Accent colour'],['Zinnoberrot','Vermilion'],['Messinggelb','Brass yellow'],['Rauchblau','Smoky blue'],
  ['Leeren','Clear'],['Rückgängig','Undo'],['Ein Zeichen wird zum','One mark becomes a'],['Rapport','repeat'],['– der Einheit, die sich wiederholt. Aus solchen Wiederholungen entstehen zum Beispiel Stoff- und Tapetenmuster.','– a little design that appears again and again. That is how a pattern grows, on fabric or wallpaper.'],
  ['Das Muster betreten','Step inside'],['Setze zuerst mindestens ein Zeichen.','Add at least one mark first.'],['Dein Zeichen verändert das Ganze.','One small change. A whole new pattern.'],
- ['Zeichen verändern','Change your mark'],['Ein Entwurf.','One design.'],['Viele Leben.','Many lives.'],['Bewege den Zeiger. Schau dich um.','Move your pointer. Look around.'],['Ziehe über den Raum. Schau dich um.','Drag across the room. Look around.'],
+ ['Muster bearbeiten','Edit your pattern'],['Ein Entwurf.','One design.'],['Viele Leben.','Many lives.'],['Bewege den Zeiger. Schau dich um.','Move your pointer. Look around.'],['Ziehe über den Raum. Schau dich um.','Drag across the room. Look around.'],
  ['Dein Browser zeigt eine flächige Ansicht. Material und Maßstab kannst du trotzdem erkunden.','Your browser is showing a flat view. You can still play with materials and size.'],
  ['Material erleben','Explore materials'],['Papier','Paper'],['Textil','Fabric'],['Metall','Metal'],
  ['Auf Papier wird dein Zeichen zur Fläche. Wie verändert es den Raum?','On paper, your mark becomes a pattern. What does it do to the room?'],
@@ -84,9 +92,9 @@ export function translateDOM(root=document.body){
     if(translated!==clean)node.nodeValue=raw.replace(clean,translated);
     record.last=translated;sourceTexts.set(node,record);
   }
-  for(const element of root.querySelectorAll('[aria-label],[aria-valuetext]')){
+  for(const element of root.querySelectorAll('[aria-label],[aria-valuetext],[alt]')){
     const records=sourceAttributes.get(element)||{};
-    for(const attr of ['aria-label','aria-valuetext']){
+    for(const attr of ['aria-label','aria-valuetext','alt']){
       const value=element.getAttribute(attr);if(!value)continue;
       let record=records[attr];if(!record||record.last!==value)record={source:deToEn.has(value)?value:(enToDe.get(value)||value)};
       const translated=language==='en'?(deToEn.get(record.source)||record.source):record.source;
