@@ -2,7 +2,7 @@
 
 Eine kleine Liebeserklärung von **Salon Format** an die Wiener Werkstätte. Eine interaktive Browser-Erfahrung: aus einem selbst gestalteten Zeichen wird ein Muster, aus dem Muster ein Raum.
 
-Öffentliche Vorschau: https://salonformat.github.io/formgefuehl/
+Öffentliche Vorschau: https://form.salonformat.com/
 
 ## Erleben
 
