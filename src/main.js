@@ -39,9 +39,8 @@ app.innerHTML = `
       <p class="preview-caption">Dein Zeichen verändert das Ganze.</p>
     </section>
     <section id="room" class="screen room" aria-labelledby="room-title" hidden>
-      <div id="room-view" class="room-view">
       <div class="room-heading"><button class="back" id="back-compose">Muster bearbeiten</button><h2 id="room-title" tabindex="-1">Dein Muster<br>wird zum Raum.</h2><p id="room-instruction">Bewege den Zeiger. Schau dich um.</p></div>
-      </div>
+      <div id="room-view" class="room-view"></div>
       <div class="room-controls"><div class="material-options" role="group" aria-label="Material erleben"><button data-material="paper" aria-pressed="true">Papier</button><button data-material="textile" aria-pressed="false">Textil</button><button data-material="metal" aria-pressed="false">Metall</button></div>
       <p id="material-copy" class="material-copy">Ein Muster für Papier oder Tapete. Die Wiener Werkstätte gestaltete beides.</p>
       <label class="scale-control" for="scale">Maßstab <input id="scale" type="range" min="1" max="7" value="3" step="0.1" aria-valuetext="Mittleres Muster"><span>Klein ↔ groß</span></label>
