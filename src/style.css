@@ -204,3 +204,25 @@ body[data-phase=end] #world{visibility:hidden}
  .room-controls .primary{width:100%}
 }
 @media(min-width:761px){.room-controls{column-gap:18px;grid-template-columns:auto 165px minmax(190px,1fr) auto}.room-controls .primary{gap:10px}}
+
+/* Give the pattern and its explanation separate, non-overlapping places. */
+@media(min-width:761px){
+ .compose{display:grid;grid-template-columns:minmax(345px,420px) minmax(0,1fr) 240px;gap:28px;padding:0 4.5vw 84px;align-items:start}
+ .workbench{max-width:100%;width:100%}
+ #compose-preview{height:calc(100svh - 235px);min-height:360px;grid-column:2;grid-row:1}
+ .compose-notes{position:static;grid-column:3;grid-row:1;align-self:center;padding:0;background:none;max-width:none;max-height:calc(100svh - 240px);overflow-y:auto}
+ .compose-notes .learning{line-height:1.6;margin-bottom:20px}
+ .compose-notes summary{line-height:1.5}
+ .compose-actions{left:4.5vw}
+ .compose .preview-caption{display:none}
+ body[data-phase=compose] #world{inset:auto;left:var(--compose-left);top:var(--compose-top);width:var(--compose-width);height:var(--compose-height);transform:none;opacity:1}
+ body[data-phase=compose] #world.fallback{padding:0}
+}
+@media(min-width:761px) and (max-width:1150px){
+ .compose{grid-template-columns:345px minmax(0,1fr);gap:20px 28px}
+ #compose-preview{height:320px;min-height:0}
+ .compose-notes{grid-column:2;grid-row:2;align-self:start;max-height:none}
+ .workbench{grid-row:1/3;grid-template-columns:minmax(210px,1fr) 90px}
+ .compose-notes .learning{margin-bottom:12px}
+}
+@media(max-width:760px){#compose-preview{display:none}.compose-notes{border-top:1px solid var(--line);margin-top:24px;padding-top:20px}}

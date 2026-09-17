@@ -33,6 +33,7 @@ app.innerHTML = `
       <canvas id="mobile-repeat" width="930" height="240" aria-hidden="true"></canvas>
       <div class="compose-actions"><button class="primary" id="enter">Das Muster betreten ${arrow}</button>
       <p id="empty-hint" class="quiet" hidden>Setze zuerst mindestens ein Zeichen.</p></div></div>
+      <div id="compose-preview" aria-hidden="true"></div>
       <aside class="compose-notes">      <p class="learning" id="repeat-learning">Ein Zeichen wird zum <em>Rapport</em> – der Einheit, die sich wiederholt. Aus solchen Wiederholungen entstehen zum Beispiel Stoff- und Tapetenmuster.</p>
       <p class="learning pattern-context">Hier spielst du mit Geometrie. Zur Wiener Werkstätte gehörten auch Blumenmuster, geschwungene Linien und verspielte Formen.</p><details class="workshop-story"><summary>Was war die Wiener Werkstätte?</summary><p>Eine Gemeinschaft von Gestalter:innen und Handwerker:innen in Wien. Josef Hoffmann, Koloman Moser und Fritz Waerndorfer gründeten sie 1903.</p><p>Sie entwarfen Möbel, Geschirr, Schmuck und Stoffe. Ihr Wunsch: Dinge des Alltags mit derselben Sorgfalt gestalten wie ein Kunstwerk.</p><p>Frauen prägten die Werkstätte entscheidend mit. Mathilde Flögl und Felice Rix-Ueno entwarfen unter anderem Stoffmuster; Vally Wieselthier wurde besonders für ihre Keramik bekannt.</p><p>Die Wiener Werkstätte bestand bis 1932. Klare geometrische Muster gehörten dazu – aber auch Blumen, geschwungene Linien und verspielte Formen.</p></details>
 </aside>
@@ -72,8 +73,8 @@ let brushShape=0,brushColor=0,brushRotation=0,erasing=false,painting=false,lastP
 const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
 let reduced = motionQuery.matches;
 const scene = createScene($('#world'), cells, accent, reduced);
-function syncRoomView(){const mobileIntro=phase==='intro'&&matchMedia('(max-width:760px)').matches;if(phase!=='room'&&!mobileIntro)return;const r=$(mobileIntro?'#intro-art':'#room-view').getBoundingClientRect();const world=$('#world'),prefix=mobileIntro?'intro':'room';for(const key of ['top','left','width','height'])world.style.setProperty(`--${prefix}-${key}`,`${r[key]}px`);}
-const viewObserver=new ResizeObserver(syncRoomView);viewObserver.observe($('#room-view'));viewObserver.observe($('#intro'));viewObserver.observe($('#intro-art'));
+function syncRoomView(){const mobileIntro=phase==='intro'&&matchMedia('(max-width:760px)').matches;const compose=phase==='compose'&&innerWidth>760;if(phase!=='room'&&!mobileIntro&&!compose)return;const r=$(compose?'#compose-preview':mobileIntro?'#intro-art':'#room-view').getBoundingClientRect();const world=$('#world'),prefix=compose?'compose':mobileIntro?'intro':'room';for(const key of ['top','left','width','height'])world.style.setProperty(`--${prefix}-${key}`,`${r[key]}px`);}
+const viewObserver=new ResizeObserver(syncRoomView);viewObserver.observe($('#room-view'));viewObserver.observe($('#intro'));viewObserver.observe($('#intro-art'));viewObserver.observe($('#compose-preview'));
 document.fonts.ready.then(syncRoomView);
 window.addEventListener('scroll',syncRoomView,{passive:true});window.addEventListener('resize',syncRoomView);
 if (scene.isFallback) $('#room-instruction').textContent = 'Dein Browser zeigt eine flächige Ansicht. Material und Maßstab kannst du trotzdem erkunden.';

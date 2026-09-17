@@ -162,6 +162,7 @@ export function createScene(container, cells, accent, reduced) {
     camera.position.set(x * (1 - p) + smoothed.x * p * 1.1, .1 + smoothed.y * p * .4, (mobile ? 18 : 14) * (1 - p) + 8 * p);
     camera.fov=44+16*p;camera.updateProjectionMatrix();
     look.set(smoothed.x * p * 6, -.6*p + smoothed.y * p * 3.5, -24 * p);
+    if(phase==='compose'){camera.position.set(1.6,.1,Math.max(13,3.9/(camera.aspect*Math.tan(22*Math.PI/180))));look.set(1.6,0,0);}
     camera.lookAt(look);
     board.position.set((phase==='intro'?2.8:1.6) * (1 - p), 0, -10 * p);
     board.rotation.y = (reduced ? -.12 : -.15 + Math.sin(time * .0002) * .035) * (1 - p);
