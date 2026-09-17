@@ -4,7 +4,7 @@ Eine kleine Liebeserklärung von **Salon Format** an die Wiener Werkstätte. Ein
 
 ## Erleben
 
-1. Ein 5 × 5 Zeichen gestalten: Felder wechseln zwischen Papier, Tintenschwarz und Akzentfarbe.
+1. Ein 5 × 5 Zeichen gestalten: Quadrat, Kreis, Bogen oder Dreieck wählen, drehen, färben und mit Klick oder Ziehen zeichnen.
 2. Die unmittelbare Wirkung der Wiederholung beobachten – den **Rapport** entdecken.
 3. Den eigenen Entwurf als räumliche Komposition betreten; Material und Maßstab verändern.
 4. Über die Verbindung von Entwurf, Handwerk und Alltag zum **Gesamtkunstwerk** nachdenken.
@@ -27,7 +27,7 @@ npm run preview
 npm test
 ```
 
-Die Dateien in `dist/` lassen sich auf einem statischen Webhost bereitstellen. Keine API-Schlüssel erforderlich. Der Produktionsbuild lädt keine externen Schriften oder Bibliotheken. GitHub ist die Sicherung des Quellcodes; eine öffentliche Veröffentlichung erfolgt separat.
+Die Dateien in `dist/` lassen sich auf einem statischen Webhost bereitstellen. Keine API-Schlüssel erforderlich. Der Produktionsbuild lädt keine externen Schriften oder Bibliotheken. GitHub Pages veröffentlicht den Build über `.github/workflows/deploy.yml`. Relative Assetpfade funktionieren sowohl unter dem Repository-Pfad als auch unter einer eigenen Domain.
 
 ## Gestaltung
 
@@ -35,7 +35,7 @@ Della Respira, Papierweiß, Tintenschwarz, Zinnoberrot, Messinggelb und Rauchbla
 
 ## Eigenständigkeit und Quellen
 
-Ein unabhängiges Vermittlungsprojekt. **Kein Auftrag und keine Kooperation mit dem MAK.** Keine übernommenen Museumsbilder, Archivscans, historischen Mustervorlagen oder Museumslogos. Alle interaktiven Muster und Raumkompositionen sind neu erzeugte Geometrien. Der Raum ist keine historische Rekonstruktion.
+Ein unabhängiges Vermittlungsprojekt. Ein Projekt von Salon Format, entstanden ohne Zusammenarbeit mit einem Museum. Keine übernommenen Museumsbilder, Archivscans, historischen Mustervorlagen oder Museumslogos. Alle interaktiven Muster und Raumkompositionen sind neu erzeugte Geometrien. Der Raum ist keine historische Rekonstruktion.
 
 Die historische Einordnung wird in eigenen Worten vermittelt; Museumseiten sind ausschließlich weiterführende Links. Fachliche Quellen und gestalterische Referenzen: [REFERENCES.md](REFERENCES.md).
 
@@ -49,6 +49,6 @@ Die lokal eingebundene Schrift Della Respira steht unter SIL Open Font License; 
 - `src/style.css`: Salon-Format-Gestaltung und responsive Darstellung
 - `PRODUCT.md` / `DESIGN.md`: verbindlicher Projekt- und Gestaltungsrahmen
 
-## Für eine spätere Präsentation beim MAK
+## Für eine spätere Präsentation bei Museen
 
 Der Prototyp vermittelt die Beziehungen zwischen Zeichen, Wiederholung, Material und Raum. Eine spätere Zusammenarbeit könnte gemeinsam ausgewählte historische Objekte ergänzen. Dafür müssten Auswahl, fachliche Freigabe und Bildnutzung mit dem jeweiligen Rechteinhaber geklärt werden; solche Materialien sind in dieser Version nicht enthalten.
