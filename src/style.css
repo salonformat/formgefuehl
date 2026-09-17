@@ -231,3 +231,11 @@ body[data-phase=compose] #world{overflow:hidden;contain:paint}
 .motif.is-erasing button{cursor:crosshair}
 .motif.is-erasing button:hover{background:#e4c6bd;outline:2px dashed var(--red);outline-offset:-3px}
 #eraser{min-height:44px;min-width:72px}
+
+/* Keep the room entry available at every desktop height, including short windows. */
+@media(min-width:761px){
+ body[data-phase=compose] main{z-index:2}
+ .compose .compose-actions{position:fixed;left:4.5vw;right:auto;bottom:76px;width:330px;max-width:calc(100vw - 48px);z-index:20;background:var(--paper);padding:8px 0 0;margin:0}
+ .compose .compose-actions .primary{width:100%;min-height:48px;padding:12px 18px}
+ .compose .workbench{padding-bottom:80px}
+}
