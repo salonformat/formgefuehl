@@ -2,6 +2,8 @@
 
 Eine kleine Liebeserklärung von **Salon Format** an die Wiener Werkstätte. Eine interaktive Browser-Erfahrung: aus einem selbst gestalteten Zeichen wird ein Muster, aus dem Muster ein Raum.
 
+Öffentliche Vorschau: https://salonformat.github.io/formgefuehl/
+
 ## Erleben
 
 1. Ein 5 × 5 Zeichen gestalten: Quadrat, Kreis, Bogen oder Dreieck wählen, drehen, färben und mit Klick oder Ziehen zeichnen.
@@ -10,7 +12,7 @@ Eine kleine Liebeserklärung von **Salon Format** an die Wiener Werkstätte. Ein
 4. Über die Verbindung von Entwurf, Handwerk und Alltag zum **Gesamtkunstwerk** nachdenken.
 5. Das persönliche Muster als PNG-Druck (1800 × 2400 px) mitnehmen.
 
-Deutsch und Englisch mit Sprachwahl oben rechts. Native Browser-Zurück/Vorwärts-Navigation zwischen allen Stationen; ein Link zu allen Salon-Format-Projekten bleibt sichtbar. Desktop, Touch und Tastatur. Ton startet nur auf ausdrücklichen Klick. Bewegung kann reduziert werden. Ohne WebGL erscheint eine zweidimensionale Musteransicht. Kein Tracking, keine Konten, keine Übertragung persönlicher Entwürfe.
+Deutsch und Englisch mit Sprachwahl oben rechts. Native Browser-Zurück/Vorwärts-Navigation zwischen allen Stationen; ein Link zu allen Salon-Format-Projekten bleibt sichtbar. Desktop, Touch und Tastatur. Ton startet nur auf ausdrücklichen Klick: Zeichenimpulse, Papierknistern, Stoffrauschen und metallische Resonanzen begleiten die jeweiligen Aktionen. Bewegung kann reduziert werden. Ohne WebGL erscheint eine zweidimensionale Musteransicht. Kein Tracking, keine Konten, keine Übertragung persönlicher Entwürfe.
 
 ## Lokal starten
 
@@ -46,6 +48,7 @@ Die lokal eingebundene Schrift Della Respira steht unter SIL Open Font License; 
 - `src/main.js`: Ablauf, Bedienung, Texte, Audio und Druckexport
 - `src/scene.js`: räumliche Darstellung, Materialien, reduzierte Bewegung, WebGL-Fallback
 - `src/pattern.js`: eigene parametrische Muster
+- `src/sound.js`: eigene prozedurale Materialgeräusche
 - `src/style.css`: Salon-Format-Gestaltung und responsive Darstellung
 - `PRODUCT.md` / `DESIGN.md`: verbindlicher Projekt- und Gestaltungsrahmen
 

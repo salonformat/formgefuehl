@@ -1,4 +1,5 @@
 import './style.css';
+import { createMaterialSound } from './sound.js';
 import { createScene } from './scene.js';
 import { INITIAL, ACCENTS, PAPER, INK, createPattern, encodeCell, decodeCell, cellColor } from './pattern.js';
 import { t, getLanguage, setLanguage, translateDOM, cellLabel } from './i18n.js';
@@ -77,25 +78,15 @@ document.fonts.ready.then(syncRoomView);
 window.addEventListener('scroll',syncRoomView,{passive:true});window.addEventListener('resize',syncRoomView);
 if (scene.isFallback) $('#room-instruction').textContent = 'Dein Browser zeigt eine flächige Ansicht. Material und Maßstab kannst du trotzdem erkunden.';
 else if (matchMedia('(pointer: coarse)').matches) $('#room-instruction').textContent = 'Ziehe über den Raum. Schau dich um.';
-let audioContext, master, oscillators = [], sound = false;
+let audioContext, materialSound, sound = false;
 function setSound(enabled) {
-  if (enabled && !audioContext) {
-    try {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      master = audioContext.createGain(); master.gain.value = 0; master.connect(audioContext.destination);
-      [130.81, 196, 261.63].forEach((hz,i) => { const o=audioContext.createOscillator(); const g=audioContext.createGain(); o.type='sine'; o.frequency.value=hz; g.gain.value=.11/(i+1); o.connect(g); g.connect(master); o.start(); oscillators.push(o); });
-    } catch { $('#sound').textContent='Ton nicht verfügbar'; $('#sound').disabled=true; return; }
+  if(enabled&&!audioContext){
+    try{audioContext=new(window.AudioContext||window.webkitAudioContext)();materialSound=createMaterialSound(audioContext);}
+    catch{$('#sound').textContent=t('Ton nicht verfügbar');$('#sound').disabled=true;return;}
   }
-  sound = enabled;
-  if (audioContext) { audioContext.resume(); master.gain.setTargetAtTime(enabled ? .22 : 0, audioContext.currentTime, .4); }
-  $('#sound').setAttribute('aria-pressed', String(sound)); $('#sound').firstChild.textContent=sound?'Ton an':'Ton aus';
-}
-function chime() {
-  if (!sound || !audioContext) return;
-  const o=audioContext.createOscillator(), g=audioContext.createGain();
-  o.frequency.value=[261.63,293.66,329.63,392,440][cells.filter(Boolean).length%5];
-  g.gain.setValueAtTime(.04,audioContext.currentTime); g.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+.5);
-  o.connect(g); g.connect(master); o.start(); o.stop(audioContext.currentTime+.5);
+  sound=enabled;
+  if(audioContext){materialSound.mute(!enabled);if(enabled){audioContext.resume().then(()=>{if(sound)materialSound.material(material);}).catch(()=>{sound=false;materialSound.mute(true);$('#sound').setAttribute('aria-pressed','false');$('#sound').firstChild.textContent=t('Ton aus');});}else materialSound.stop();}
+  $('#sound').setAttribute('aria-pressed',String(sound));$('#sound').firstChild.textContent=t(sound?'Ton an':'Ton aus');
 }
 function announce(text) { $('#announcement').textContent=t(text); }
 const routes={intro:'anfang',compose:'zeichen',room:'raum',end:'gedanke'};
@@ -110,7 +101,7 @@ function setPhase(next, record=true) {
   window.scrollTo(0,0);
   syncRoomView();
   const heading = $(`#${next} h1, #${next} h2`); heading.setAttribute('tabindex','-1'); heading.focus({preventScroll:true});
-  if (sound && audioContext) oscillators.forEach((o,i)=>o.frequency.setTargetAtTime([130.81,196,261.63][i]*(next==='room'?1: .75),audioContext.currentTime,1));
+  materialSound?.stop();if(sound&&next==='room')materialSound.unfold(material,reduced);
   translateDOM();
 }
 function renderGrid() {
@@ -125,7 +116,7 @@ function renderGrid() {
   context.fillRect(0,0,strip.width,strip.height);
 }
 function remember() { history.push([...cells]); if(history.length>50)history.shift(); }
-function edit(i) { hasEdited=true;cells[i]=erasing?0:encodeCell(brushShape,brushColor,brushRotation);renderGrid();scene.pulse?.();if(!reduced){$('#motif').children[i].animate([{transform:'scale(.82)'},{transform:'scale(1.07)'},{transform:'scale(1)'}],{duration:230,easing:'ease-out'});$('#mobile-repeat').animate([{opacity:.65},{opacity:1}],{duration:200});}chime();announce('Dein Zeichen wiederholt sich im Muster.'); }
+function edit(i) { hasEdited=true;cells[i]=erasing?0:encodeCell(brushShape,brushColor,brushRotation);renderGrid();scene.pulse?.();if(!reduced){$('#motif').children[i].animate([{transform:'scale(.82)'},{transform:'scale(1.07)'},{transform:'scale(1)'}],{duration:230,easing:'ease-out'});$('#mobile-repeat').animate([{opacity:.65},{opacity:1}],{duration:200});}if(sound)materialSound.draw(i,erasing);announce('Dein Zeichen wiederholt sich im Muster.'); }
 $('#motif').addEventListener('pointerdown',e=>{const b=e.target.closest('[data-index]');if(!b)return;e.preventDefault();remember();painting=true;lastPainted=Number(b.dataset.index);b.focus({preventScroll:true});edit(lastPainted);});
 window.addEventListener('pointermove',e=>{if(!painting)return;const b=document.elementFromPoint(e.clientX,e.clientY)?.closest('#motif [data-index]');if(b){const i=Number(b.dataset.index);if(i!==lastPainted){lastPainted=i;edit(i);}}});
 window.addEventListener('pointerup',()=>painting=false);window.addEventListener('pointercancel',()=>painting=false);window.addEventListener('blur',()=>painting=false);
@@ -146,9 +137,9 @@ document.querySelectorAll('[data-material]').forEach(b=>b.onclick=()=>{
   material=b.dataset.material;scene.update(cells,accent,material);
   document.querySelectorAll('[data-material]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
   $('#material-copy').textContent={paper:'Ein Muster für Papier oder Tapete. Die Wiener Werkstätte gestaltete beides.',textile:'Jetzt liegt dein Muster in Falten. Stoffentwürfe von Frauen wie Felice Rix-Ueno und Mathilde Flögl prägten die Wiener Werkstätte.',metal:'Jetzt fällt Licht auf Metall. Auch Metallarbeiten gehörten zur Wiener Werkstätte, vom Schmuck bis zum Gebrauchsgegenstand.'}[material];
-  announce($('#material-copy').textContent);chime();
+  announce($('#material-copy').textContent);if(sound){materialSound.stop();materialSound.material(material);}
 });
-$('#scale').oninput=e=>{const v=Number(e.target.value);scene.setScale(8-v);e.target.setAttribute('aria-valuetext',v<3?'Kleines, dichtes Muster':v>5?'Großes, weites Muster':'Mittleres Muster');};
+$('#scale').oninput=e=>{const v=Number(e.target.value);scene.setScale(8-v);if(sound)materialSound.scale(material);e.target.setAttribute('aria-valuetext',v<3?'Kleines, dichtes Muster':v>5?'Großes, weites Muster':'Mittleres Muster');};
 $('#scale').value='5';
 document.querySelectorAll('[data-reflect]').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('[data-reflect]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
@@ -169,7 +160,7 @@ window.addEventListener('pointermove',e=>{if(phase==='room'&&!e.target.closest('
 window.addEventListener('keydown',e=>{if(phase==='room'&& !e.target.matches('input,button')){const delta={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]}[e.key];if(delta){e.preventDefault();scene.setPointer(...delta);}}});
 const about=$('#about-dialog'); $('#about').onclick=()=>about.showModal();$('#close-about').onclick=()=>about.close();
 about.addEventListener('click',e=>{if(e.target===about){const r=about.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)about.close();}});
-document.addEventListener('visibilitychange',()=>{if(audioContext)document.hidden?audioContext.suspend():sound&&audioContext.resume();});
+document.addEventListener('visibilitychange',()=>{if(audioContext)document.hidden?(materialSound.stop(),audioContext.suspend()):sound&&audioContext.resume();});
 $('#download').onclick=async()=>{
   const button=$('#download');button.disabled=true;
   try {
