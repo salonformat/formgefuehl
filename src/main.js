@@ -31,8 +31,7 @@ app.innerHTML = `
       </div><p class="tap-guide">Dein Zeichen wiederholt sich im Muster.</p>
       <div class="editor-tools"><div class="swatches" role="group" aria-label="Farbe wählen">${[INK,...ACCENTS].map((a,i)=>`<button class="swatch" style="--swatch:${a}" data-color="${i}" aria-label="${['Tintenschwarz','Zinnoberrot','Messinggelb','Rauchblau'][i]}" aria-pressed="${i===0}"></button>`).join('')}</div><button class="text-button" id="eraser" aria-pressed="false">Radieren</button></div><div class="edit-actions"><button class="text-button" id="clear">Leeren</button><button class="text-button" id="undo" disabled>Rückgängig</button></div>
       <canvas id="mobile-repeat" width="930" height="240" aria-hidden="true"></canvas>
-      <div class="compose-actions"><button class="primary" id="enter">Das Muster betreten ${arrow}</button>
-      <p id="empty-hint" class="quiet" hidden>Setze zuerst mindestens ein Zeichen.</p></div></div>
+      </div>
       <div id="compose-preview" aria-hidden="true"></div>
       <aside class="compose-notes">      <p class="learning" id="repeat-learning">Ein Zeichen wird zum <em>Rapport</em> – der Einheit, die sich wiederholt. Aus solchen Wiederholungen entstehen zum Beispiel Stoff- und Tapetenmuster.</p>
       <p class="learning pattern-context">Hier spielst du mit Geometrie. Zur Wiener Werkstätte gehörten auch Blumenmuster, geschwungene Linien und verspielte Formen.</p><details class="workshop-story"><summary>Was war die Wiener Werkstätte?</summary><p>Eine Gemeinschaft von Gestalter:innen und Handwerker:innen in Wien. Josef Hoffmann, Koloman Moser und Fritz Waerndorfer gründeten sie 1903.</p><p>Sie entwarfen Möbel, Geschirr, Schmuck und Stoffe. Ihr Wunsch: Dinge des Alltags mit derselben Sorgfalt gestalten wie ein Kunstwerk.</p><p>Frauen prägten die Werkstätte entscheidend mit. Mathilde Flögl und Felice Rix-Ueno entwarfen unter anderem Stoffmuster; Vally Wieselthier wurde besonders für ihre Keramik bekannt.</p><p>Die Wiener Werkstätte bestand bis 1932. Klare geometrische Muster gehörten dazu – aber auch Blumen, geschwungene Linien und verspielte Formen.</p></details>
@@ -63,6 +62,7 @@ app.innerHTML = `
       </div><p class="independent">Ein unabhängiges Projekt von Salon Format, entstanden ohne Zusammenarbeit mit einem Museum.</p></div>
     </section>
   </main>
+  <div class="compose-actions" hidden><button class="primary" id="enter">Das Muster betreten ${arrow}</button><p id="empty-hint" class="quiet" hidden>Setze zuerst mindestens ein Zeichen.</p></div>
   <footer><nav aria-label="Deine Reise"><span data-step="intro" aria-current="step">Anfang</span><span data-step="compose">Zeichen</span><span data-step="room">Raum</span><span data-step="end">Gedanke</span></nav><button id="about">Über diese Erfahrung</button></footer>
   <dialog id="about-dialog" aria-labelledby="about-title"><button id="close-about" class="text-button">Schließen</button><h2 id="about-title">Formgefühl.</h2><p>Eine kleine Liebeserklärung von Salon Format an die Wiener Werkstätte: an das genaue Hinsehen, an die Verbindung von Kunst und Handwerk, an die Sorgfalt selbst im kleinsten Detail.</p><p>Du gestaltest ein eigenes Zeichen, erkundest Wiederholung, Maßstab und Material – und erlebst die Idee des Gesamtkunstwerks.</p><p>Formgefühl ist ein unabhängiges Projekt von Salon Format, entstanden ohne Zusammenarbeit mit einem Museum. Alle Muster, Räume und Klänge wurden eigens dafür entwickelt.</p><a href="https://salonformat.com">Mehr von Salon Format</a><p class="quiet">Ohne Anmeldung. Ohne Tracking. Dein Entwurf bleibt während der Sitzung in deinem Browser.</p></dialog>
   <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
@@ -96,6 +96,7 @@ function writeURL(next,replace=false){const url=new URL(location.href);url.hash=
 function setPhase(next, record=true) {
   if(record && next!==phase)writeURL(next);
   phase = next; document.body.dataset.phase=next;
+  $('.compose-actions').hidden=next!=='compose';
   document.querySelectorAll('.screen').forEach(s => { s.hidden=s.id!==next; });
   document.querySelectorAll('[data-step]').forEach(s => s.setAttribute('aria-current',s.dataset.step===next?'step':'false'));
   scene.setPhase(next);

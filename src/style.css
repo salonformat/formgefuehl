@@ -235,7 +235,17 @@ body[data-phase=compose] #world{overflow:hidden;contain:paint}
 /* Keep the room entry available at every desktop height, including short windows. */
 @media(min-width:761px){
  body[data-phase=compose] main{z-index:2}
- .compose .compose-actions{position:fixed;left:4.5vw;right:auto;bottom:76px;width:330px;max-width:calc(100vw - 48px);z-index:20;background:var(--paper);padding:8px 0 0;margin:0}
- .compose .compose-actions .primary{width:100%;min-height:48px;padding:12px 18px}
+ body[data-phase=compose] .compose-actions{position:fixed;left:4.5vw;right:auto;bottom:76px;width:330px;max-width:calc(100vw - 48px);z-index:20;background:var(--paper);padding:8px 0 0;margin:0}
+ body[data-phase=compose] .compose-actions .primary{width:100%;min-height:48px;padding:12px 18px}
  .compose .workbench{padding-bottom:80px}
+}
+
+/* The entry action is a sibling of the editor, never inside its scrolling area. */
+@media(max-width:760px){
+ body[data-phase=compose]{overflow:hidden}
+ body[data-phase=compose] #app{height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}
+ body[data-phase=compose] header{grid-row:1;height:100px}
+ body[data-phase=compose] main{grid-row:2;height:auto;min-height:0;overflow-y:auto}
+ body[data-phase=compose] .compose-actions{grid-row:3;position:relative;inset:auto;width:100%;max-width:none;min-height:0;margin:0;padding:12px 24px max(12px,env(safe-area-inset-bottom));z-index:20;background:var(--paper);border-top:1px solid var(--line)}
+ body[data-phase=compose] .compose-actions .primary{width:100%;min-height:52px;font-size:17px}
 }
