@@ -1,5 +1,6 @@
 import { decodeCell } from './pattern.js';
 const pairs = [
+ ['Klicke oder ziehe über die Kästchen, die du löschen möchtest.','Click or drag across the squares you want to erase.'],
  ['Hier spielst du mit Geometrie. Zur Wiener Werkstätte gehörten auch Blumenmuster, geschwungene Linien und verspielte Formen.', 'Here you play with geometry. The Wiener Werkstätte also embraced floral patterns, flowing lines and playful shapes.'],
  ["Vom Stoff bis zum Sessel.", "From fabric to furniture."],
  ["Die Wiener Werkstätte entwarf nicht nur einzelne Dinge, sondern auch ganze Einrichtungen. Möbel, Stoffe und Geschirr wurden dabei aufeinander abgestimmt.", "The Wiener Werkstätte designed individual objects as well as entire interiors, with furniture, fabrics and tableware made to go together."],

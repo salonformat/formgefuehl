@@ -128,12 +128,17 @@ $('#motif').addEventListener('keydown',e=>{
 });
 $('#clear').onclick=()=>{remember();cells=Array(25).fill(0);renderGrid();announce('Dein Zeichen ist leer.');};
 $('#undo').onclick=()=>{if(history.length){cells=history.pop();renderGrid();}};
-function disableEraser(){erasing=false;$('#eraser').setAttribute('aria-pressed','false');}
+function updateEraser(){
+  $('#eraser').setAttribute('aria-pressed',String(erasing));
+  $('#motif').classList.toggle('is-erasing',erasing);
+  $('.tap-guide').textContent=t(erasing?'Klicke oder ziehe über die Kästchen, die du löschen möchtest.':'Dein Zeichen wiederholt sich im Muster.');
+}
+function disableEraser(){erasing=false;updateEraser();}
 document.querySelectorAll('[data-color]').forEach(b=>b.onclick=()=>{brushColor=Number(b.dataset.color);disableEraser();document.querySelectorAll('[data-color]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
 document.querySelectorAll('.shape-tools [data-shape]').forEach(b=>b.onclick=()=>{brushShape=Number(b.dataset.shape);disableEraser();document.querySelectorAll('.shape-tools [data-shape]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
 document.querySelector('.shape-tools [data-shape="2"] svg').innerHTML=shapePaths[2];
 $('#rotate').onclick=()=>{brushRotation=(brushRotation+1)%4;document.querySelectorAll('.shape-tools [data-shape] svg').forEach(s=>s.style.transform=`rotate(${brushRotation*90}deg)`);};
-$('#eraser').onclick=()=>{erasing=!erasing;$('#eraser').setAttribute('aria-pressed',String(erasing));};
+$('#eraser').onclick=()=>{erasing=!erasing;updateEraser();};
 document.querySelectorAll('[data-material]').forEach(b=>b.onclick=()=>{
   material=b.dataset.material;scene.update(cells,accent,material);
   document.querySelectorAll('[data-material]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));

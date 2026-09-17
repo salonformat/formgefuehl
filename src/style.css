@@ -226,3 +226,8 @@ body[data-phase=end] #world{visibility:hidden}
  .compose-notes .learning{margin-bottom:12px}
 }
 @media(max-width:760px){#compose-preview{display:none}.compose-notes{border-top:1px solid var(--line);margin-top:24px;padding-top:20px}}
+
+body[data-phase=compose] #world{overflow:hidden;contain:paint}
+.motif.is-erasing button{cursor:crosshair}
+.motif.is-erasing button:hover{background:#e4c6bd;outline:2px dashed var(--red);outline-offset:-3px}
+#eraser{min-height:44px;min-width:72px}
