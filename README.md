@@ -55,3 +55,7 @@ Die lokal eingebundene Schrift Della Respira steht unter SIL Open Font License; 
 ## Für eine spätere Präsentation bei Museen
 
 Der Prototyp vermittelt die Beziehungen zwischen Zeichen, Wiederholung, Material und Raum. Eine spätere Zusammenarbeit könnte gemeinsam ausgewählte historische Objekte ergänzen. Dafür müssten Auswahl, fachliche Freigabe und Bildnutzung mit dem jeweiligen Rechteinhaber geklärt werden; solche Materialien sind in dieser Version nicht enthalten.
+
+French edition: https://form.salonformat.com/?lang=fr
+
+Language and journey navigation are covered by `tests/language.test.js`, including browser back/forward, preserved motifs, dynamic content, and export captions.

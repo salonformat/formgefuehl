@@ -1,4 +1,5 @@
 import { decodeCell } from './pattern.js';
+import { french } from './fr.js';
 const pairs = [
  ['Klicke oder ziehe über die Kästchen, die du löschen möchtest.','Click or drag across the squares you want to erase.'],
  ['Hier spielst du mit Geometrie. Zur Wiener Werkstätte gehörten auch Blumenmuster, geschwungene Linien und verspielte Formen.', 'Here you play with geometry. The Wiener Werkstätte also embraced floral patterns, flowing lines and playful shapes.'],
@@ -76,21 +77,30 @@ const pairs = [
  ['Dein Zeichen ist leer.','Your canvas is clear.'],['Das Bild konnte nicht gespeichert werden. Bitte versuche es erneut.','We could not save the image. Please try again.'],['Dein Muster ist als Druckdatei bereit.','Your pattern is ready to keep.'],
  ['DEIN ENTWURF · SALON FORMAT','YOUR DESIGN · SALON FORMAT'],['Aus einem Zeichen wird eine Welt.','One little mark. A whole new world.'],['Eine freie Auseinandersetzung mit der Wiener Werkstätte.','A playful exploration of the Wiener Werkstätte.'],
 ];
-const deToEn = new Map(pairs), enToDe = new Map(pairs.map(([de,en])=>[en,de]));
+const deToEn = new Map(pairs);
+const toSource = new Map([
+  ...pairs.map(([de,en])=>[en,de]),
+  ...Object.entries(french).map(([de,fr])=>[fr,de]),
+  ...pairs.map(([de])=>[de,de]),
+]);
+export const supportedLanguages = ['de','en','fr'];
+export function untranslatedFrenchKeys(){return pairs.map(([de])=>de).filter(de=>!french[de]);}
+function sourceOf(value){return toSource.get(value)||value;}
+function translateSource(source){return language==='fr'?(french[source]||source):language==='en'?(deToEn.get(source)||source):source;}
 let language = 'de';
 const sourceTexts = new WeakMap();
 const sourceAttributes = new WeakMap();
 export function getLanguage(){return language;}
-export function setLanguage(value){language=value==='en'?'en':'de';}
-export function t(value){return language==='en'?(deToEn.get(value)||value):(enToDe.get(value)||value);}
+export function setLanguage(value){language=supportedLanguages.includes(value)?value:'de';}
+export function t(value){return translateSource(sourceOf(value));}
 export function translateDOM(root=document.body){
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
   const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
   for(const node of nodes){
     if(node.parentElement?.closest('script,style'))continue;
     const raw=node.nodeValue,clean=raw.trim();let record=sourceTexts.get(node);
-    if(!record||record.last!==clean)record={source:deToEn.has(clean)?clean:(enToDe.get(clean)||clean),last:clean};
-    const translated=language==='en'?(deToEn.get(record.source)||record.source):record.source;
+    if(!record||record.last!==clean)record={source:sourceOf(clean),last:clean};
+    const translated=translateSource(record.source);
     if(translated!==clean)node.nodeValue=raw.replace(clean,translated);
     record.last=translated;sourceTexts.set(node,record);
   }
@@ -98,14 +108,14 @@ export function translateDOM(root=document.body){
     const records=sourceAttributes.get(element)||{};
     for(const attr of ['aria-label','aria-valuetext','alt']){
       const value=element.getAttribute(attr);if(!value)continue;
-      let record=records[attr];if(!record||record.last!==value)record={source:deToEn.has(value)?value:(enToDe.get(value)||value)};
-      const translated=language==='en'?(deToEn.get(record.source)||record.source):record.source;
+      let record=records[attr];if(!record||record.last!==value)record={source:sourceOf(value)};
+      const translated=translateSource(record.source);
       element.setAttribute(attr,translated);record.last=translated;records[attr]=record;
     }
     sourceAttributes.set(element,records);
   }
   document.documentElement.lang=language;
-  document.title=language==='en'?'A Feel for Form — Salon Format':'Formgefühl — Salon Format';
-  document.querySelector('meta[name="description"]').content=language==='en'?'One mark. One pattern. A whole world. A playful journey into the Wiener Werkstätte by Salon Format.':'Ein Zeichen. Ein Muster. Eine ganze Welt. Eine spielerische Reise zur Wiener Werkstätte von Salon Format.';
+  document.title=`${t('Formgefühl')} — Salon Format`;
+  document.querySelector('meta[name="description"]').content=language==='fr'?'Un dessin, un motif, tout un monde. Une découverte ludique de la Wiener Werkstätte, signée Salon Format.':language==='en'?'One mark. One pattern. A whole world. A playful journey into the Wiener Werkstätte by Salon Format.':'Ein Zeichen. Ein Muster. Eine ganze Welt. Eine spielerische Reise zur Wiener Werkstätte von Salon Format.';
 }
-export function cellLabel(i,value){const v=decodeCell(value);const de=value?`${['Quadrat','Kreis','Bogen','Dreieck'][v.shape]}, ${['schwarz','rot','gelb','blau'][v.color]}`:'leer';const en=value?`${['square','circle','arc','triangle'][v.shape]}, ${['black','red','yellow','blue'][v.color]}`:'empty';return language==='en'?`Row ${Math.floor(i/5)+1}, column ${i%5+1}: ${en}. Click to draw.`:`Zeile ${Math.floor(i/5)+1}, Spalte ${i%5+1}: ${de}. Klicken zum Zeichnen.`;}
+export function cellLabel(i,value){const v=decodeCell(value);const de=value?`${['Quadrat','Kreis','Bogen','Dreieck'][v.shape]}, ${['schwarz','rot','gelb','blau'][v.color]}`:'leer';const en=value?`${['square','circle','arc','triangle'][v.shape]}, ${['black','red','yellow','blue'][v.color]}`:'empty';const fr=value?`${['carré','cercle','arc','triangle'][v.shape]}, ${['noir','rouge','jaune','bleu'][v.color]}`:'vide';return language==='fr'?`Ligne ${Math.floor(i/5)+1}, colonne ${i%5+1} : ${fr}. Clique pour dessiner.`:language==='en'?`Row ${Math.floor(i/5)+1}, column ${i%5+1}: ${en}. Click to draw.`:`Zeile ${Math.floor(i/5)+1}, Spalte ${i%5+1}: ${de}. Klicken zum Zeichnen.`;}

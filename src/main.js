@@ -10,7 +10,7 @@ const app = document.querySelector('#app');
 app.innerHTML = `
   <div id="world"></div>
   <header><div class="brand-links"><a class="brand" href="https://salonformat.com" aria-label="Salon Format – zur Website">salon<span>format</span></a><a class="all-projects" href="https://salonformat.com/#projects">Alle Projekte <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div>
-    <div class="header-actions"><button id="motion" aria-pressed="false" aria-label="Bewegung reduzieren">Bewegung reduzieren</button><button id="sound" aria-pressed="false">Ton aus<span class="sound-mark" aria-hidden="true"></span></button><div class="languages" role="group" aria-label="Language / Sprache"><button data-lang="de" lang="de" aria-label="Deutsch" aria-pressed="true">DE</button><button data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button></div></div>
+    <div class="header-actions"><button id="motion" aria-pressed="false" aria-label="Bewegung reduzieren">Bewegung reduzieren</button><button id="sound" aria-pressed="false">Ton aus<span class="sound-mark" aria-hidden="true"></span></button><div class="languages" role="group" aria-label="Language / Sprache / Langue"><button data-lang="de" lang="de" aria-label="Deutsch" aria-pressed="true">DE</button><button data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button><button data-lang="fr" lang="fr" aria-label="Français" aria-pressed="false">FR</button></div></div>
   </header>
   <main>
     <section id="intro" class="screen intro" aria-labelledby="title">
@@ -183,10 +183,11 @@ $('#download').onclick=async()=>{
   } catch { button.disabled=false;announce('Das Bild konnte nicht gespeichert werden. Bitte versuche es erneut.'); }
 };
 function changeLanguage(lang,record=true){
+  if(record&&lang===getLanguage())return;
   setLanguage(lang);translateDOM();
   document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===getLanguage())));
   [...$('#motif').children].forEach((b,i)=>b.setAttribute('aria-label',cellLabel(i,cells[i])));
-  if(record)writeURL(phase,true);
+  if(record)writeURL(phase);
 }
 document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>changeLanguage(b.dataset.lang));
 app.addEventListener('click',()=>queueMicrotask(()=>translateDOM()));
